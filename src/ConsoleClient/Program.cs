@@ -2,7 +2,7 @@
 using IdentityModel.Client;
 
 // discover endpoints from metadata
-var client = new HttpClient();
+using var client = new HttpClient();
 var disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
 
 if (disco.IsError)
@@ -32,7 +32,7 @@ Console.WriteLine($"Identity Token: {tokenResponse.IdentityToken}");
 Console.WriteLine($"Refresh Token: {tokenResponse.RefreshToken}");
 
 // call api
-var apiClient = new HttpClient();
+using var apiClient = new HttpClient();
 apiClient.SetBearerToken(tokenResponse.AccessToken);
 
 var response = await apiClient.GetAsync("https://localhost:6001/identity");
