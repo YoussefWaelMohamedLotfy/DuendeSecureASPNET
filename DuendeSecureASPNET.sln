@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Api\Api.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "src\Client\Client.csproj", "{53E0F6C5-2DEA-4CAC-B5DC-B22F301CB4FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "src\WebClient\WebClient.csproj", "{1CAFAFAA-A784-4912-AE5A-A17DC7D7B97C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "src\WebClient\WebClient.csproj", "{1CAFAFAA-A784-4912-AE5A-A17DC7D7B97C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServerAspNetIdentity", "src\IdentityServerAspNetIdentity\IdentityServerAspNetIdentity.csproj", "{A21B9859-4829-4118-93B6-B138FFBD14C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{1CAFAFAA-A784-4912-AE5A-A17DC7D7B97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CAFAFAA-A784-4912-AE5A-A17DC7D7B97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CAFAFAA-A784-4912-AE5A-A17DC7D7B97C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A21B9859-4829-4118-93B6-B138FFBD14C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A21B9859-4829-4118-93B6-B138FFBD14C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A21B9859-4829-4118-93B6-B138FFBD14C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A21B9859-4829-4118-93B6-B138FFBD14C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{F3B9AB7B-486B-47EA-91AB-A5007A1F9CA5} = {5266DE6D-7C27-4C9F-8F4A-755E3EE5EC4C}
 		{53E0F6C5-2DEA-4CAC-B5DC-B22F301CB4FD} = {5266DE6D-7C27-4C9F-8F4A-755E3EE5EC4C}
 		{1CAFAFAA-A784-4912-AE5A-A17DC7D7B97C} = {5266DE6D-7C27-4C9F-8F4A-755E3EE5EC4C}
+		{A21B9859-4829-4118-93B6-B138FFBD14C6} = {5266DE6D-7C27-4C9F-8F4A-755E3EE5EC4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8A0CAF2-2E26-4474-A775-D8E24B7352A5}

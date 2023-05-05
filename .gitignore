@@ -19,6 +19,10 @@ mono_crash.*
 # Duende IdentityServer Keys
 keys/
 
+# SQLite files
+*.db
+*.db*
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

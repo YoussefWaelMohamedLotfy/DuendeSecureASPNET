@@ -26,9 +26,11 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("offline_access");
         options.Scope.Add("email-verification");
         options.Scope.Add("phone-verification");
+        options.Scope.Add("color");
         options.ClaimActions.MapJsonKey("email_verified", "email_verified");
         options.ClaimActions.MapJsonKey("phone_number", "phone_number");
         options.ClaimActions.MapJsonKey("phone_number_verified", "phone_number_verified");
+        options.ClaimActions.MapUniqueJsonKey("favorite_color", "favorite_color");
         options.GetClaimsFromUserInfoEndpoint = true;
 
         options.SaveTokens = true;
