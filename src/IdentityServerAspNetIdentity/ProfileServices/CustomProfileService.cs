@@ -21,9 +21,6 @@ public sealed class CustomProfileService : ProfileService<ApplicationUser>
         if (!string.IsNullOrEmpty(user.FavoriteColor))
         {
             id.AddClaim(new Claim("favorite_color", user.FavoriteColor));
-            //id.AddClaim(new Claim(JwtClaimTypes.EmailVerified, user.PhoneNumberConfirmed.ToString(), ClaimValueTypes.Boolean));
-            //id.AddClaim(new Claim(JwtClaimTypes.PhoneNumber, user.PhoneNumber));
-            //id.AddClaim(new Claim(JwtClaimTypes.PhoneNumberVerified, user.PhoneNumberConfirmed.ToString(), ClaimValueTypes.Boolean));
         }
         
         context.AddRequestedClaims(principal.Claims);

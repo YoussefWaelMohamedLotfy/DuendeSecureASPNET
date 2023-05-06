@@ -16,6 +16,7 @@ internal static class HostingExtensions
         IdentityModelEventSource.ShowPII = true;
 
         builder.Services.AddRazorPages();
+        var migrationsAssembly = typeof(Program).Assembly.GetName().Name;
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -33,9 +34,16 @@ internal static class HostingExtensions
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
             })
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients)
+            .AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = b => b.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
+                    sql => sql.MigrationsAssembly(migrationsAssembly));
+            })
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = b => b.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
+                    sql => sql.MigrationsAssembly(migrationsAssembly));
+            })
             .AddAspNetIdentity<ApplicationUser>()
             .AddProfileService<CustomProfileService>();
 

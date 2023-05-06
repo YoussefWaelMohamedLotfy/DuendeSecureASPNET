@@ -1,4 +1,6 @@
-﻿using IdentityModel;
+﻿using Duende.IdentityServer.EntityFramework.DbContexts;
+using Duende.IdentityServer.EntityFramework.Mappers;
+using IdentityModel;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,40 +15,42 @@ public sealed class SeedData
     public static async void EnsureSeedData(WebApplication app)
     {
         using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
-        //scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+        scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
 
-        //var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-        //context.Database.Migrate();
-        var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
-        context.Database.EnsureDeleted();
-        context.Database.Migrate();
+        var configcontext = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+        configcontext.Database.EnsureDeleted();
+        configcontext.Database.Migrate();
 
-        //if (!context.Clients.Any())
-        //{
-        //    foreach (var client in Config.Clients)
-        //    {
-        //        context.Clients.Add(client.ToEntity());
-        //    }
-        //    context.SaveChanges();
-        //}
+        var appContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+        appContext.Database.EnsureDeleted();
+        appContext.Database.Migrate();
 
-        //if (!context.IdentityResources.Any())
-        //{
-        //    foreach (var resource in Config.IdentityResources)
-        //    {
-        //        context.IdentityResources.Add(resource.ToEntity());
-        //    }
-        //    context.SaveChanges();
-        //}
+        if (!configcontext.Clients.Any())
+        {
+            foreach (var client in Config.Clients)
+            {
+                configcontext.Clients.Add(client.ToEntity());
+            }
+            configcontext.SaveChanges();
+        }
 
-        //if (!context.ApiScopes.Any())
-        //{
-        //    foreach (var resource in Config.ApiScopes)
-        //    {
-        //        context.ApiScopes.Add(resource.ToEntity());
-        //    }
-        //    context.SaveChanges();
-        //}
+        if (!configcontext.IdentityResources.Any())
+        {
+            foreach (var resource in Config.IdentityResources)
+            {
+                configcontext.IdentityResources.Add(resource.ToEntity());
+            }
+            configcontext.SaveChanges();
+        }
+
+        if (!configcontext.ApiScopes.Any())
+        {
+            foreach (var resource in Config.ApiScopes)
+            {
+                configcontext.ApiScopes.Add(resource.ToEntity());
+            }
+            configcontext.SaveChanges();
+        }
 
         var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var alice = await userMgr.FindByNameAsync("alice");
