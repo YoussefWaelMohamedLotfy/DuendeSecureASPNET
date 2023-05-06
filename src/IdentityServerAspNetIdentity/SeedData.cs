@@ -18,11 +18,11 @@ public sealed class SeedData
         scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
 
         var configcontext = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-        configcontext.Database.EnsureDeleted();
+        //configcontext.Database.EnsureDeleted();
         configcontext.Database.Migrate();
 
         var appContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
-        appContext.Database.EnsureDeleted();
+        //appContext.Database.EnsureDeleted();
         appContext.Database.Migrate();
 
         if (!configcontext.Clients.Any())

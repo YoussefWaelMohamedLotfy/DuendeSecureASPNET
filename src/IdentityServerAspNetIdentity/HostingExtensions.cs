@@ -13,8 +13,6 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        IdentityModelEventSource.ShowPII = true;
-
         builder.Services.AddRazorPages();
         var migrationsAssembly = typeof(Program).Assembly.GetName().Name;
 
@@ -68,6 +66,7 @@ internal static class HostingExtensions
 
         if (app.Environment.IsDevelopment())
         {
+            IdentityModelEventSource.ShowPII = true;
             app.UseDeveloperExceptionPage();
         }
 
