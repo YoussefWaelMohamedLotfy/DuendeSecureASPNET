@@ -8,16 +8,17 @@ namespace WebClient.Pages
     public class CallApiModel : PageModel
     {
         public string Json = string.Empty;
+        private readonly JsonSerializerOptions jsonOptions = new() { WriteIndented = true };
+        private static readonly HttpClient client = new();
 
         public async Task OnGet()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var content = await client.GetStringAsync("https://localhost:6001/identity");
 
             var parsed = JsonDocument.Parse(content);
-            var formatted = JsonSerializer.Serialize(parsed, new JsonSerializerOptions { WriteIndented = true });
+            var formatted = JsonSerializer.Serialize(parsed, jsonOptions);
 
             Json = formatted;
         }

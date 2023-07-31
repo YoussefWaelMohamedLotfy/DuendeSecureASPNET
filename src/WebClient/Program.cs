@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Authentication;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +18,9 @@ builder.Services.AddAuthentication(options =>
         options.ClientId = "web";
         options.ClientSecret = "secret";
         options.ResponseType = "code";
+        options.UsePkce = false;
+
+        options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
 
         options.Scope.Clear();
         options.Scope.Add("openid");
@@ -31,8 +34,8 @@ builder.Services.AddAuthentication(options =>
         options.ClaimActions.MapJsonKey("phone_number", "phone_number");
         options.ClaimActions.MapJsonKey("phone_number_verified", "phone_number_verified");
         options.ClaimActions.MapUniqueJsonKey("favorite_color", "favorite_color");
+        
         options.GetClaimsFromUserInfoEndpoint = true;
-
         options.SaveTokens = true;
     });
 
