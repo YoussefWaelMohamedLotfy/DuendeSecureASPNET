@@ -52,6 +52,15 @@ public sealed class SeedData
             configcontext.SaveChanges();
         }
 
+        if (!configcontext.ApiResources.Any())
+        {
+            foreach (var resource in Config.ApiResources)
+            {
+                configcontext.ApiResources.Add(resource.ToEntity());
+            }
+            configcontext.SaveChanges();
+        }
+
         var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var alice = await userMgr.FindByNameAsync("alice");
 
